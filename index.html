@@ -24,9 +24,110 @@
         <li>Nauczyć się JS</li>
         <li id="super-important">Zaimplementować</li>
     </ol>
+    <button type="button" onmouseover="removeBoringStuff()">Click me!</button>
+    <input type="text" id="myTextField">
+    <input type="checkbox" id="myCheckbox">
+    <button type="button" onclick="readValues()">Odczytaj wartości</button>
 </div>
 <script>
     alert('Witamy witamy');
+
+    //Adding another alert by element id
+    // const header = document.getElementById('main-header');
+    // alert(header.innerText);
+    //
+    // //Adding more alerts by elements selectors and removing the boring class from them
+    // const nudy = document.querySelectorAll("#app .boring");
+    // nudy.forEach(element => {
+    //     alert(`Nuda: ${element.innerText}`);
+    //     element.classList.remove('boring');
+    // });
+
+    //Creating and inserting elements by id
+    let div = document.createElement('div');
+    div.classList.add('green');
+    div.innerText = 'Zielony tekst (jeśli dodasz CSS)';
+    document.getElementById('app').append(div); //This adds the div element as the last child inside the #app element
+
+    //Creating and inserting elements by selector
+    let listItem = document.createElement('li');
+    listItem.innerText = 'Zagrać';
+    document.querySelector("#app ol li:last-child").after(listItem); //It inserts listItem after selected element as a sibling (not a child!)
+
+    //Delete all elements with class boring
+    // document.querySelectorAll("#app .boring").forEach((e) => e.remove());
+
+    //Remove class from the element
+    div.classList.remove("green");
+
+    //Add class to the element
+    div.classList.add("anotherClass");
+
+    // Toggles visibility: adds 'visible' if it's not present, removes it if it is
+    div.classList.toggle("visible");
+
+    // Can also use test condition - sets 'visible' class only if i < 10
+    // div.classList.toggle("visible", i < 10);
+
+    //Check whether the div element has the class foo and then displays an alert with the result (true or false)
+    alert(div.classList.contains("foo"));
+
+    function removeBoringStuff() {
+        document.querySelectorAll("#app .boring").forEach((e) => e.remove());
+    }
+
+    function readValues() {
+        var textFieldValue = document.getElementById('myTextField').value;
+        var checkboxChecked = document.getElementById('myCheckbox').checked;
+
+        if (checkboxChecked) {
+            alert('Text field value: ' + textFieldValue);
+        } else {
+            alert('Checkbox is not checked, cannot read value');
+        }
+    }
+
+    function delayedFunction(delay) {
+        setTimeout(() => {
+            console.log('Later');
+        }, delay);
+    }
+    delayedFunction(1500);
+
+    function cancelDelayedFunction(delay) {
+        const timeoutId = setTimeout(() => {
+            console.log('Later 2');
+        }, delay);
+
+        clearTimeout(timeoutId);
+    }
+    cancelDelayedFunction(1500);
+
+    function cyclicFunction(interval) {
+        const intervalId = setInterval(() => {
+            console.log('Again');
+        }, interval);
+
+        setTimeout(() => {
+            clearInterval(intervalId);
+            console.log('Interval stopped');
+        }, 5000);
+    }
+    cyclicFunction(1500);
+
+    function generateRandomNumber() {
+        const randomNumberBetwen0And1 = Math.random();
+        console.log(randomNumberBetwen0And1);
+    }
+    generateRandomNumber();
+
+    function getCurrentTimestamp() {
+        const now = new Date();
+        const timestampInMilliseconds = now.getTime();
+        console.log(timestampInMilliseconds);
+    }
+    getCurrentTimestamp();
+
 </script>
 </body>
 </html>
